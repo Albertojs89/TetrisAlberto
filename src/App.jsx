@@ -2,6 +2,7 @@ import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
+import Partidas from "./components/Partidas";
 
 function App() {
   
@@ -16,15 +17,21 @@ function App() {
             alt="Vite logo"
           />
         </a>
-       
       </div>
-      <h1>TETRIS</h1>
-      <h2>Alberto</h2>
-     
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-      <button className="btn btn-primary">Botón de Bootstrap</button>
+      <h1>
+        <a href="" className="logo">
+          TETRIS
+        </a>
+      </h1>
+      <h2>
+        <a href="" className="logo">
+          Alberto
+        </a>
+      </h2>
+
+      <div className="App">
+        <Partidas />
+      </div>
     </>
   );
 }

@@ -1,0 +1,30 @@
+
+
+.custom-table {
+  font-size: 1.2rem; /* Aumenta el tamaño del texto */
+  width: 700px; /* Hace que la tabla ocupe todo el ancho del contenedor */
+  max-width: 1200px; /* Ancho máximo para la tabla */
+  margin: 0 auto; /* Centra la tabla horizontalmente */
+  border-radius: 15px;
+}
+
+.custom-table th,
+.custom-table td {
+  padding: 1.5rem; /* Aumenta el relleno en las celdas */
+  
+}
+
+.custom-table th button {
+  width: 90px; /* Hace que los botones del encabezado ocupen todo el ancho de la celda */
+}
+
+.custom-table tr:hover {
+  background-color: #343a40; /* Cambia el color de fondo al pasar el ratón */
+}
+
+
+.btn-agregar{
+  background-color: rgb(73, 209, 214) !important;
+  margin-top: 50px;
+  color: rgb(50, 43, 158);
+}
