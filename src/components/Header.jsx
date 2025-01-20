@@ -1,28 +1,37 @@
+// src/components/Header.jsx
+import React from "react";
+import { Link } from "react-router-dom";
+import "./Header.css";
 
-export function Header(){
+const Header = () => {
   return (
-    <div>
-      <nav className="navbar navbar-expand-lg bg-dark rounded border border-primary">
-        <div className="container-fluid">
-          {/* Logotipo */}
-          <a className="navbar-brand text-warning" href="#">
-            <img src="src/assets/logo.png" alt="Logo" width="80" height="80" />
-            Tetris
-          </a>
-
-          {/* Enlaces del menú */}
-          <div className="d-flex">
-            <a href="#" className="navbar-brand text-warning mx-3">
+    <header className="header-container border border-info p-3">
+      <nav className="d-flex justify-content-start align-items-center">
+        <ul className="nav">
+          <li className="nav-item">
+            <Link to="/" className="nav-link">
+              Inicio
+            </Link>
+          </li>
+          <li className="nav-item">
+            <Link to="/partidas" className="nav-link">
               Partidas
-            </a>
-            <a href="#" className="navbar-brand text-warning mx-3">
-              Jugar
-            </a>
-          </div>
-        </div>
+            </Link>
+          </li>
+          <li className="nav-item">
+            <Link to="/ranking" className="nav-link">
+              Ranking
+            </Link>
+          </li>
+          <li className="nav-item">
+            <Link to="/juego" className="nav-link">
+              Juego
+            </Link>
+          </li>
+        </ul>
       </nav>
-    </div>
+    </header>
   );
-}
+};
 
 export default Header;

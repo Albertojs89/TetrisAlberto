@@ -3,5 +3,11 @@ body {
 				background-size: cover;
 				background-image: url("assets/fondo.jpg");
 				font-family: "VT323", monospace;
-				font-size: 25px;
+				font-size: 40px;
 			}
+
+#intro{
+	font-family: "VT323", monospace;
+	font-size: 25px;
+	color: yellow;
+}

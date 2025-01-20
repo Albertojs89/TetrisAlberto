@@ -1,0 +1,26 @@
+/* src/components/Header.css */
+.header-container {
+  border: 2px solid #17a2b8; /* Azul claro */
+  background-color: transparent; /* Fondo sin color */
+  font-family: "VT323", monospace;
+  color: #ffc107; /* Amarillo */
+  font-size: 36px;
+}
+
+.nav-link {
+  color: #ffc107; /* Amarillo */
+  font-size: 1rem; /* Ajuste del tamaño para la fuente retro */
+  text-decoration: none;
+  margin-right: 20px;
+}
+
+.nav-link:hover {
+  color: #ffd700; /* Amarillo más brillante */
+  text-decoration: underline;
+}
+
+.nav {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
