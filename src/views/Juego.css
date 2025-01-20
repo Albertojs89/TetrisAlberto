@@ -1,0 +1,9 @@
+.juego-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh; /* Ocupar toda la altura de la ventana */
+  background-color: #1e1e1e; /* Fondo oscuro */
+  color: white;
+}

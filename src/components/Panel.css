@@ -1,0 +1,35 @@
+/* Contenedor principal del panel */
+.panel-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centrar tablero horizontalmente */
+  justify-content: center; /* Centrar tablero verticalmente si es necesario */
+  margin: 0 auto;
+  background-color: black;
+  border: 3px solid #333;
+}
+
+/* Filas del tablero */
+.panel-row {
+  display: flex;
+}
+
+/* Celdas del tablero */
+.panel-cell {
+  width: 40px; /* Aumentar el tamaño de las celdas */
+  height: 40px; /* Aumentar el tamaño de las celdas */
+  border: 1px solid #444; /* Bordes de las celdas */
+  background-color: #000; /* Fondo negro */
+}
+
+/* Bordes del tablero */
+.border-cell {
+  background-color: #222;
+}
+
+/* Celdas ocupadas */
+.cell-content {
+  width: 100%;
+  height: 100%;
+  background-color: #f39c12; /* Ejemplo de celda ocupada */
+}
