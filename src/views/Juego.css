@@ -6,4 +6,8 @@
   height: 100vh; /* Ocupar toda la altura de la ventana */
   background-color: #1e1e1e; /* Fondo oscuro */
   color: white;
+  font-family: "VT323", monospace;
+}
+h2{
+  font-size: 50px!important;
 }

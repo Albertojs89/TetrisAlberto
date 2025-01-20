@@ -8,7 +8,7 @@ const Juego = () => {
 
   return (
     <div className="juego-container">
-      <h2 className="text-center">Panel de Juego</h2>
+      <h2 className="text-center">Start</h2>
       <Panel array={arrayCasillas} />
     </div>
   );
