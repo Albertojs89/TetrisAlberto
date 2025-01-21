@@ -3,11 +3,71 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100vh; /* Ocupar toda la altura de la ventana */
-  background-color: #1e1e1e; /* Fondo oscuro */
   color: white;
   font-family: "VT323", monospace;
 }
+
 h2{
   font-size: 50px!important;
+}
+h3{
+  font-size: 50px;
+  color: yellow;
+  border: 4px solid yellow;
+  padding: 10px;
+  background-color: blueviolet;
+  opacity: 70%;
+}
+/* Contenedor de todas las piezas */
+.piezas-grid {
+  display: flex;
+  background-color: rgb(82, 34, 128);
+  opacity: 80%;
+  flex-wrap: wrap; /* Permite ajustar las piezas en filas */
+  justify-content: space-evenly; /* Distribuye las piezas uniformemente */
+  align-items: center; /* Centra las piezas verticalmente */
+  gap: 20px; /* Espacio uniforme entre piezas */
+  margin-top: 20px;
+}
+
+/* Contenedor individual de cada pieza */
+.pieza-container {
+  display: flex;
+  flex-direction: column; /* Coloca el título arriba y las variantes abajo */
+  align-items: center; /* Centra las variantes horizontalmente */
+  width: 100px; /* Tamaño fijo para cada pieza */
+  margin: 10px;
+  text-align: center; /* Centra el texto del título */
+}
+
+/* Contenedor de cada variante de una pieza */
+.variante-pieza {
+  display: block; /* Cada variante en bloque separado */
+  margin: 10px 0; /* Espacio entre variantes */
+}
+
+/* Contenedor principal de cada pieza */
+.pieza-container .pieza-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.pieza-row {
+  display: flex; /* Las celdas de la fila se colocan horizontalmente */
+}
+
+/* Celdas de la pieza */
+.pieza-cell {
+  width: 20px; /* Tamaño fijo */
+  height: 20px;
+  border: 1px solid #444;
+  background-color: #000;
+}
+
+/* Contenido dinámico dentro de las celdas */
+.cell-content {
+  width: 100%;
+  height: 100%;
+  background-color: #3498db; /* Ejemplo de color para las piezas */
 }

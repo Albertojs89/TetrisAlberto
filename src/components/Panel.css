@@ -2,12 +2,17 @@
 .panel-container {
   display: flex;
   flex-direction: column;
-  align-items: center; /* Centrar tablero horizontalmente */
-  justify-content: center; /* Centrar tablero verticalmente si es necesario */
-  margin: 0 auto;
-  background-color: black;
-  border: 3px solid #333;
+  justify-content: center;
+  align-items: center;
+  background-image: url(/pixelAnimado.gif); /* Ruta correcta */
+  background-size: cover; /* El fondo cubrirá todo el contenedor */
+  background-position: center; /* Centra el fondo */
+  background-repeat: no-repeat; /* Evita que el fondo se repita */
+  width: 100%; /* Asegura que ocupe todo el ancho del contenedor */
+  height: 100%; /* Asegura que ocupe todo el alto del contenedor */
+  border: 2px solid #444; /* Mantén los bordes del tablero */
 }
+
 
 /* Filas del tablero */
 .panel-row {
