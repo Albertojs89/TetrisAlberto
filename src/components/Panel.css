@@ -1,0 +1,40 @@
+/* Contenedor principal del panel */
+.panel-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-image: url(/pixelAnimado.gif); /* Ruta correcta */
+  background-size: cover; /* El fondo cubrirá todo el contenedor */
+  background-position: center; /* Centra el fondo */
+  background-repeat: no-repeat; /* Evita que el fondo se repita */
+  width: 100%; /* Asegura que ocupe todo el ancho del contenedor */
+  height: 100%; /* Asegura que ocupe todo el alto del contenedor */
+  border: 2px solid #444; /* Mantén los bordes del tablero */
+}
+
+
+/* Filas del tablero */
+.panel-row {
+  display: flex;
+}
+
+/* Celdas del tablero */
+.panel-cell {
+  width: 40px; /* Aumentar el tamaño de las celdas */
+  height: 40px; /* Aumentar el tamaño de las celdas */
+  border: 1px solid #444; /* Bordes de las celdas */
+  background-color: #000; /* Fondo negro */
+}
+
+/* Bordes del tablero */
+.border-cell {
+  background-color: #222;
+}
+
+/* Celdas ocupadas */
+.cell-content {
+  width: 100%;
+  height: 100%;
+  background-color: #f39c12; /* Ejemplo de celda ocupada */
+}

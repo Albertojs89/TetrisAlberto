@@ -6,8 +6,14 @@
   max-width: 1200px; /* Ancho máximo para la tabla */
   margin: 0 auto; /* Centra la tabla horizontalmente */
   border-radius: 15px;
+  font-family: "VT323", monospace;
+	font-size: 30px;
+  
 }
-
+h2{
+  font-family: "VT323", monospace;
+  color: white;
+}
 .custom-table th,
 .custom-table td {
   padding: 1.5rem; /* Aumenta el relleno en las celdas */
@@ -24,7 +30,8 @@
 
 
 .btn-agregar{
-  background-color: rgb(73, 209, 214) !important;
+  font-family: "VT323", monospace!important;
+  font-size: 30px !important;
   margin-top: 50px;
   color: rgb(50, 43, 158);
 }

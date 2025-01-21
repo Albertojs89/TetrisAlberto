@@ -1,0 +1,44 @@
+<!-- 
+ 
+React Router se basa en el concepto de:
+
+Enrutador (Router): Componente principal que gestiona las rutas. En React, se usa BrowserRouter para aplicaciones web basadas en URL.
+Rutas (Routes): Especifican qué componentes deben renderizarse para cada URL.
+Enlaces (Links): Permiten cambiar entre rutas sin recargar la página.
+
+
+1. Instalar React Router npm install react-router-dom
+2. Configurar el enrutador principal (en app.jsx) import { BrowserRouter as Router } from 'react-router-dom';
+3. Definir las rutas: 
+    function App() {
+      return (
+        <Router>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/partidas" element={<Partidas />} />
+          </Routes>
+        </Router>
+      );
+
+4.Crear enlaces para la navegación:
+  En el componente Header por ejemplo:
+
+        import { Link } from 'react-router-dom';
+
+        const Header = () => (
+          <header>
+            <nav>
+              <ul>
+                <li><Link to="/">Inicio</Link></li>
+                <li><Link to="/partidas">Partidas</Link></li>
+              </ul>
+            </nav>
+          </header>
+        );
+
+
+
+
+
+
+-->
