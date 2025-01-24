@@ -24,6 +24,7 @@ EXPLICACION----------------------------------------------------------------
 Pieza.jsx:
 
 Similar a Panel, pero muestra matrices individuales (las piezas del Tetris).
+En juego.jsx se envia variante como Prop que recorre las piezas y sus variantes.
 Renderiza dinámicamente las variantes de rotación de una pieza específica usando las matrices dentro de modelos.piezas.
 
 

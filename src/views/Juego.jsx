@@ -10,6 +10,7 @@ const Juego = () => {
   const [arrayCasillas] = useState(modelos.matriz);
 
   return (
+    //Vista del panel de juego----->
     <div className="juego-container">
       <h2 className="text-center">¡Start!</h2>
       <Panel array={arrayCasillas} />
