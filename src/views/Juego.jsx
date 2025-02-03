@@ -1,13 +1,61 @@
-import React, { useState } from 'react';
-import Panel from '../components/Panel';
-import Pieza from '../components/Pieza';
-import modelos from '../lib/modelos';
+import React, { useState, useEffect } from "react";
+import Panel from "../components/Panel";
+import Pieza from "../components/Pieza";
+import modelos from "../lib/modelos";
 import "./Juego.css";
 
-
-
 const Juego = () => {
-  const [arrayCasillas] = useState(modelos.matriz);
+  const [arrayCasillas, setArrayCasillas] = useState(modelos.matriz);
+
+  // Estado para la pieza activa y su posición
+  const [piezaActiva, setPiezaActiva] = useState(null);
+  const [posicionPieza, setPosicionPieza] = useState({ x: 4, y: 0 });
+
+  // Función para generar una nueva pieza aleatoria
+  const generarPiezaNueva = () => {
+    const piezas = modelos.piezas;
+    const piezaAleatoria = piezas[Math.floor(Math.random() * piezas.length)];
+    setPiezaActiva(piezaAleatoria);
+    setPosicionPieza({ x: 4, y: 0 }); // Posición inicial
+  };
+
+  // Insertar la pieza activa en la matriz del tablero
+  const actualizarTablero = () => {
+    if (!piezaActiva) return;
+
+    // Crear una copia de la matriz del tablero
+    const nuevoTablero = arrayCasillas.map((fila) => [...fila]);
+
+    // Obtener la forma de la pieza (siempre tomamos la variante 0 por ahora)
+    const formaPieza = piezaActiva.matriz[0];
+
+    // Insertar la pieza en la posición actual
+    for (let row = 0; row < formaPieza.length; row++) {
+      for (let col = 0; col < formaPieza[row].length; col++) {
+        if (formaPieza[row][col] !== 0) {
+          // Si no es un espacio vacío
+          const nuevaX = posicionPieza.x + col;
+          const nuevaY = posicionPieza.y + row;
+          if (nuevoTablero[nuevaY] && nuevoTablero[nuevaY][nuevaX] === 0) {
+            nuevoTablero[nuevaY][nuevaX] = formaPieza[row][col]; // Coloca la pieza en la matriz
+          }
+        }
+      }
+    }
+
+    // Actualizar el estado con la nueva matriz
+    setArrayCasillas(nuevoTablero);
+  };
+
+  // Efecto para actualizar el tablero cada vez que cambia la pieza activa o su posición
+  useEffect(() => {
+    actualizarTablero();
+  }, [piezaActiva, posicionPieza]);
+
+  // Generamos una pieza al iniciar el juego
+  useEffect(() => {
+    generarPiezaNueva();
+  }, []);
 
   return (
     //Vista del panel de juego----->
@@ -15,7 +63,19 @@ const Juego = () => {
       <h2 className="text-center">¡Start!</h2>
       <Panel array={arrayCasillas} />
 
+
+      {/* Vista de la pieza activa */}
+      {piezaActiva && (
+        <div className="pieza-activa-container">
+          <h3 className="text-center">Pieza Activa</h3>
+          <Pieza matriz={piezaActiva.matriz[0]} />
+        </div>
+      )}
+
+      {/* Vista de piezas (mantiene el diseño anterior) */}
+=======
     {/* Vista de las piezas */}
+main
       <h3 className="text-center mt-4">Vista de Piezas</h3>
       <div className="piezas-grid">
         {modelos.piezas.map((pieza, index) => (
@@ -32,10 +92,6 @@ const Juego = () => {
     </div>
   );
 };
-
-
-
-
 
 /*
 Flujo completo
