@@ -58,9 +58,11 @@ const Juego = () => {
   }, []);
 
   return (
+    //Vista del panel de juego----->
     <div className="juego-container">
       <h2 className="text-center">¡Start!</h2>
       <Panel array={arrayCasillas} />
+
 
       {/* Vista de la pieza activa */}
       {piezaActiva && (
@@ -71,6 +73,9 @@ const Juego = () => {
       )}
 
       {/* Vista de piezas (mantiene el diseño anterior) */}
+=======
+    {/* Vista de las piezas */}
+main
       <h3 className="text-center mt-4">Vista de Piezas</h3>
       <div className="piezas-grid">
         {modelos.piezas.map((pieza, index) => (
