@@ -33,7 +33,6 @@ const Juego = () => {
     for (let row = 0; row < formaPieza.length; row++) {
       for (let col = 0; col < formaPieza[row].length; col++) {
         if (formaPieza[row][col] !== 0) {
-          // Si no es un espacio vacío
           const nuevaX = posicionPieza.x + col;
           const nuevaY = posicionPieza.y + row;
           if (nuevoTablero[nuevaY] && nuevoTablero[nuevaY][nuevaX] === 0) {
@@ -57,12 +56,126 @@ const Juego = () => {
     generarPiezaNueva();
   }, []);
 
+  // 📌 MOVER LAS FUNCIONES AQUÍ DENTRO PARA QUE FUNCIONEN EN EL COMPONENTE
+  // Función para detectar las teclas y llamar a las funciones correspondientes
+  const controlTeclas = (event) => {
+    if (!piezaActiva) return;
+
+    switch (event.key) {
+      case "ArrowLeft":
+        console.log("⬅️ Tecla izquierda detectada");
+        moverIzquierda();
+        break;
+      case "ArrowRight":
+        console.log("➡️ Tecla derecha detectada");
+        moverDerecha();
+        break;
+      case "ArrowDown":
+        console.log("⬇️ Tecla abajo detectada");
+        bajarPieza();
+        break;
+      case "ArrowUp":
+        console.log("🔄 Tecla arriba detectada");
+        girarPieza();
+        break;
+      default:
+        break;
+    }
+  };
+
+  // Añadir eventListener en useEffect para escuchar las teclas
+  useEffect(() => {
+    window.addEventListener("keydown", controlTeclas);
+
+    return () => {
+      window.removeEventListener("keydown", controlTeclas);
+    };
+  }, [piezaActiva]);
+
+  // Implementar las funciones con mensajes en consola
+  const moverIzquierda = () => {
+    console.log("Moviendo la pieza a la izquierda ⬅️");
+  };
+
+  const moverDerecha = () => {
+    console.log("Moviendo la pieza a la derecha ➡️");
+  };
+
+const bajarPieza = () => {
+  console.log("⬇️ Moviendo la pieza hacia abajo");
+
+  setPosicionPieza((prevPosicion) => {
+    const nuevaPosicion = { ...prevPosicion, y: prevPosicion.y + 1 };
+
+    setArrayCasillas((prevTablero) => {
+      // Creamos una copia del tablero
+      const nuevoTablero = prevTablero.map((fila) => [...fila]);
+
+      // Borrar la pieza antes de moverla
+      borrarPieza(nuevoTablero, prevPosicion);
+
+      // Insertar la pieza en la nueva posición
+      insertarPieza(nuevoTablero, nuevaPosicion);
+
+      return nuevoTablero; // Retornar el nuevo tablero para actualizar el estado
+    });
+
+    return nuevaPosicion; // Retornar la nueva posición para actualizar el estado
+  });
+};
+
+
+
+
+  // Función para borrar la pieza del tablero antes de moverla
+const borrarPieza = (tablero, posicion) => {
+  if (!piezaActiva) return;
+
+  const formaPieza = piezaActiva.matriz[0];
+
+  for (let row = 0; row < formaPieza.length; row++) {
+    for (let col = 0; col < formaPieza[row].length; col++) {
+      if (formaPieza[row][col] !== 0) {
+        const nuevaX = posicion.x + col;
+        const nuevaY = posicion.y + row;
+        if (tablero[nuevaY] && tablero[nuevaY][nuevaX] !== 1) {
+          tablero[nuevaY][nuevaX] = 0; // Borra la celda anterior
+        }
+      }
+    }
+  }
+};
+
+const insertarPieza = (tablero, nuevaPosicion) => {
+  if (!piezaActiva) return;
+
+  const formaPieza = piezaActiva.matriz[0];
+
+  for (let row = 0; row < formaPieza.length; row++) {
+    for (let col = 0; col < formaPieza[row].length; col++) {
+      if (formaPieza[row][col] !== 0) {
+        const nuevaX = nuevaPosicion.x + col;
+        const nuevaY = nuevaPosicion.y + row;
+        if (tablero[nuevaY] && tablero[nuevaY][nuevaX] === 0) {
+          tablero[nuevaY][nuevaX] = formaPieza[row][col]; // Coloca la pieza en la nueva posición
+        }
+      }
+    }
+  }
+};
+
+
+
+
+  const girarPieza = () => {
+    console.log("Girando la pieza 🔄");
+  };
+  
+
   return (
-    //Vista del panel de juego----->
     <div className="juego-container">
       <h2 className="text-center">¡Start!</h2>
       <Panel array={arrayCasillas} />
-
 
       {/* Vista de la pieza activa */}
       {piezaActiva && (
@@ -72,10 +185,7 @@ const Juego = () => {
         </div>
       )}
 
-      {/* Vista de piezas (mantiene el diseño anterior) */}
-=======
-    {/* Vista de las piezas */}
-main
+      {/* Vista de las piezas */}
       <h3 className="text-center mt-4">Vista de Piezas</h3>
       <div className="piezas-grid">
         {modelos.piezas.map((pieza, index) => (
@@ -90,8 +200,20 @@ main
         ))}
       </div>
     </div>
+    
   );
+
+  
 };
+
+
+
+
+
+export default Juego;
+
+
+
 
 /*
 Flujo completo
@@ -171,4 +293,4 @@ variante-pieza:
 Contenedor para una variante de la pieza.
 Cada variante se renderiza de forma independiente dentro del componente Pieza
 */
-export default Juego;
+
