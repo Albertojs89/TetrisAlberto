@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Panel from "../components/Panel";
 import Pieza from "../components/Pieza";
 import modelos from "../lib/modelos";
@@ -82,6 +82,17 @@ const Juego = () => {
         break;
     }
   };
+  const intervaloRef = useRef(null);
+
+  const iniciarMovimiento = () => {
+    if (intervaloRef.current) return; // Evita múltiples intervalos
+
+    console.log("▶️ Iniciando el movimiento automático");
+
+    intervaloRef.current = setInterval(() => {
+      bajarPieza();
+    }, 500); // La pieza bajará cada 500ms
+  };
 
   // Añadir eventListener en useEffect para escuchar las teclas
   useEffect(() => {
@@ -101,86 +112,83 @@ const Juego = () => {
     console.log("Moviendo la pieza a la derecha ➡️");
   };
 
-const bajarPieza = () => {
-  console.log("⬇️ Moviendo la pieza hacia abajo");
+  const bajarPieza = () => {
+    console.log("⬇️ Moviendo la pieza hacia abajo");
 
-  setPosicionPieza((prevPosicion) => {
-    const nuevaPosicion = { ...prevPosicion, y: prevPosicion.y + 1 };
+    setPosicionPieza((prevPosicion) => {
+      const nuevaPosicion = { ...prevPosicion, y: prevPosicion.y + 1 };
 
-    setArrayCasillas((prevTablero) => {
-      // Creamos una copia del tablero
-      const nuevoTablero = prevTablero.map((fila) => [...fila]);
+      setArrayCasillas((prevTablero) => {
+        // Creamos una copia del tablero
+        const nuevoTablero = prevTablero.map((fila) => [...fila]);
 
-      // Borrar la pieza antes de moverla
-      borrarPieza(nuevoTablero, prevPosicion);
+        // Borrar la pieza antes de moverla
+        borrarPieza(nuevoTablero, prevPosicion);
 
-      // Insertar la pieza en la nueva posición
-      insertarPieza(nuevoTablero, nuevaPosicion);
+        // Insertar la pieza en la nueva posición
+        insertarPieza(nuevoTablero, nuevaPosicion);
 
-      return nuevoTablero; // Retornar el nuevo tablero para actualizar el estado
+        return nuevoTablero; // Retornar el nuevo tablero para actualizar el estado
+      });
+
+      return nuevaPosicion; // Retornar la nueva posición para actualizar el estado
     });
-
-    return nuevaPosicion; // Retornar la nueva posición para actualizar el estado
-  });
-};
-
-
-
+  };
 
   // Función para borrar la pieza del tablero antes de moverla
-const borrarPieza = (tablero, posicion) => {
-  if (!piezaActiva) return;
+  const borrarPieza = (tablero, posicion) => {
+    if (!piezaActiva) return;
 
-  const formaPieza = piezaActiva.matriz[0];
+    const formaPieza = piezaActiva.matriz[0];
 
-  for (let row = 0; row < formaPieza.length; row++) {
-    for (let col = 0; col < formaPieza[row].length; col++) {
-      if (formaPieza[row][col] !== 0) {
-        const nuevaX = posicion.x + col;
-        const nuevaY = posicion.y + row;
-        if (tablero[nuevaY] && tablero[nuevaY][nuevaX] !== 1) {
-          tablero[nuevaY][nuevaX] = 0; // Borra la celda anterior
+    for (let row = 0; row < formaPieza.length; row++) {
+      for (let col = 0; col < formaPieza[row].length; col++) {
+        if (formaPieza[row][col] !== 0) {
+          const nuevaX = posicion.x + col;
+          const nuevaY = posicion.y + row;
+          if (tablero[nuevaY] && tablero[nuevaY][nuevaX] !== 1) {
+            tablero[nuevaY][nuevaX] = 0; // Borra la celda anterior
+          }
         }
       }
     }
-  }
-};
+  };
 
-const insertarPieza = (tablero, nuevaPosicion) => {
-  if (!piezaActiva) return;
+  const insertarPieza = (tablero, nuevaPosicion) => {
+    if (!piezaActiva) return;
 
-  const formaPieza = piezaActiva.matriz[0];
+    const formaPieza = piezaActiva.matriz[0];
 
-  for (let row = 0; row < formaPieza.length; row++) {
-    for (let col = 0; col < formaPieza[row].length; col++) {
-      if (formaPieza[row][col] !== 0) {
-        const nuevaX = nuevaPosicion.x + col;
-        const nuevaY = nuevaPosicion.y + row;
-        if (tablero[nuevaY] && tablero[nuevaY][nuevaX] === 0) {
-          tablero[nuevaY][nuevaX] = formaPieza[row][col]; // Coloca la pieza en la nueva posición
+    for (let row = 0; row < formaPieza.length; row++) {
+      for (let col = 0; col < formaPieza[row].length; col++) {
+        if (formaPieza[row][col] !== 0) {
+          const nuevaX = nuevaPosicion.x + col;
+          const nuevaY = nuevaPosicion.y + row;
+          if (tablero[nuevaY] && tablero[nuevaY][nuevaX] === 0) {
+            tablero[nuevaY][nuevaX] = formaPieza[row][col]; // Coloca la pieza en la nueva posición
+          }
         }
       }
     }
-  }
-};
-
-
-
+  };
 
   const girarPieza = () => {
     console.log("Girando la pieza 🔄");
   };
-  
 
   return (
     <div className="juego-container">
       <h2 className="text-center">¡Start!</h2>
+
       <Panel array={arrayCasillas} />
 
       {/* Vista de la pieza activa */}
       {piezaActiva && (
         <div className="pieza-activa-container">
-          <h3 className="text-center">Pieza Activa</h3>
+          <button className="btn btn-success mt-3" onClick={iniciarMovimiento}>
+            🎮 JUGAR
+          </button>
+          <h3 className="text-center mt-5 mb-4">Pieza Activa</h3>
           <Pieza matriz={piezaActiva.matriz[0]} />
         </div>
       )}
@@ -200,20 +208,10 @@ const insertarPieza = (tablero, nuevaPosicion) => {
         ))}
       </div>
     </div>
-    
   );
-
-  
 };
 
-
-
-
-
 export default Juego;
-
-
-
 
 /*
 Flujo completo
@@ -293,4 +291,3 @@ variante-pieza:
 Contenedor para una variante de la pieza.
 Cada variante se renderiza de forma independiente dentro del componente Pieza
 */
-
