@@ -103,15 +103,100 @@ const Juego = () => {
     };
   }, [piezaActiva]);
 
-  // Implementar las funciones con mensajes en consola
+  // Función para verificar si la posición de la pieza es válida
+  const esPosicionValida = (posicion) => {
+    if (!piezaActiva) return false;
+
+    const { x, y } = posicion;
+    const formaPieza = piezaActiva.matriz[0];
+
+    for (let row = 0; row < formaPieza.length; row++) {
+      for (let col = 0; col < formaPieza[row].length; col++) {
+        if (formaPieza[row][col] !== 0) {
+          const nuevaX = x + col;
+          const nuevaY = y + row;
+
+          // Verifica que la pieza no salga del tablero ni choque con otra pieza
+          if (
+            nuevaX < 0 ||
+            nuevaX >= arrayCasillas[0].length || // Límite lateral
+            nuevaY >= arrayCasillas.length || // Límite inferior
+            (arrayCasillas[nuevaY] && arrayCasillas[nuevaY][nuevaX] !== 0) // Colisión con otra pieza
+          ) {
+            return false;
+          }
+        }
+      }
+    }
+    return true;
+  };
+
+  // Implementar las funciones de mover las piezas--------------------------------------------------------
+  // Función para mover la pieza a la izquierda
+  // Función para mover la pieza a la izquierda
+  // Función para mover la pieza a la izquierda
   const moverIzquierda = () => {
-    console.log("Moviendo la pieza a la izquierda ⬅️");
+    if (!piezaActiva) return;
+
+    console.log("⬅️ Moviendo la pieza a la izquierda");
+
+    setPosicionPieza((prevPosicion) => {
+      const nuevaPosicion = { ...prevPosicion, x: prevPosicion.x - 1 };
+
+      if (esPosicionValida(nuevaPosicion)) {
+        setArrayCasillas((prevTablero) => {
+          const nuevoTablero = prevTablero.map((fila) => [...fila]);
+
+          // Borra la pieza antes de moverla
+          borrarPieza(nuevoTablero, prevPosicion);
+
+          // Inserta la pieza en la nueva posición
+          insertarPieza(nuevoTablero, nuevaPosicion);
+
+          console.log("Nueva posición izquierda:", nuevaPosicion);
+
+          return nuevoTablero;
+        });
+
+        return nuevaPosicion; // Retorna la nueva posición correctamente
+      }
+
+      return prevPosicion; // Si no es válida, mantiene la posición anterior
+    });
   };
 
+  // Función para mover la pieza a la derecha
   const moverDerecha = () => {
-    console.log("Moviendo la pieza a la derecha ➡️");
+    if (!piezaActiva) return;
+
+    console.log("➡️ Moviendo la pieza a la derecha");
+
+    setPosicionPieza((prevPosicion) => {
+      const nuevaPosicion = { ...prevPosicion, x: prevPosicion.x + 1 };
+
+      if (esPosicionValida(nuevaPosicion)) {
+        setArrayCasillas((prevTablero) => {
+          const nuevoTablero = prevTablero.map((fila) => [...fila]);
+
+          // Borra la pieza antes de moverla
+          borrarPieza(nuevoTablero, prevPosicion);
+
+          // Inserta la pieza en la nueva posición
+          insertarPieza(nuevoTablero, nuevaPosicion);
+
+          console.log("Nueva posición derecha:", nuevaPosicion);
+
+          return nuevoTablero;
+        });
+
+        return nuevaPosicion; // Retorna la nueva posición correctamente
+      }
+
+      return prevPosicion; // Si no es válida, mantiene la posición anterior
+    });
   };
 
+  //-------------------------------------------------------------------------------
   const bajarPieza = () => {
     console.log("⬇️ Moviendo la pieza hacia abajo");
 
