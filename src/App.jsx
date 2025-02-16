@@ -8,6 +8,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import modelos from "./lib/modelos";
 import Juego from "./views/Juego";
 import Inicio from './components/Inicio';
+import Ranking from "./components/Ranking"; // Importamos el nuevo componente de Ranking
 
 function App() {
   console.log("Modelos cargados:", modelos);
@@ -18,8 +19,9 @@ function App() {
         <main>
           <Routes>
             <Route path="/" element={<Inicio />} />
-            <Route path="/" element={<h1>Bienvenido a Tetris</h1>} />
             <Route path="/partidas" element={<Partidas />} />
+            <Route path="/ranking" element={<Ranking partidas={[]} />} />{" "}
+            {/* Nueva ruta para el ranking */}
             <Route path="/juego" element={<Juego />} />
           </Routes>
         </main>
@@ -27,5 +29,6 @@ function App() {
     </Router>
   );
 }
+
 
 export default App

@@ -1,5 +1,6 @@
 import React from "react";
-import "./Inicio.css"; 
+import { Link } from "react-router-dom"; // Importamos Link
+import "./Inicio.css";
 
 const Inicio = () => {
   return (
@@ -21,7 +22,9 @@ const Inicio = () => {
           Al final de la partida podràs desar la teva puntuació, i veure el
           ranking de jugadors
         </p>
-        <button className="btn btn-success fs-1 mt-5">JUGAR</button>
+        <Link to="/juego" className="btn btn-success fs-1 mt-5">
+          JUGAR
+        </Link>
         <hr />
       </div>
     </main>

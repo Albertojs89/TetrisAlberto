@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import "./Partidas.css";
 
-
 const Partidas = () => {
   const [arrayPrueba, setArrayPrueba] = useState([
     { nick: "Jugador1", puntos: 150, fecha: "2024-12-01" },
@@ -14,6 +13,15 @@ const Partidas = () => {
       a[campo] > b[campo] ? 1 : -1
     );
     setArrayPrueba(arrayOrdenado);
+  };
+
+  const agregarPartida = () => {
+    const nuevaPartida = {
+      nick: `Jugador${arrayPrueba.length + 1}`,
+      puntos: Math.floor(Math.random() * 500) + 50,
+      fecha: new Date().toISOString().split("T")[0],
+    };
+    setArrayPrueba([...arrayPrueba, nuevaPartida]);
   };
 
   return (
@@ -59,7 +67,12 @@ const Partidas = () => {
         </tbody>
       </table>
       <div>
-        <button className="btn btn-primary btn-agregar">Agregar Partida</button>
+        <button
+          className="btn btn-primary btn-agregar"
+          onClick={agregarPartida}
+        >
+          ➕ Agregar Partida Aleatoria
+        </button>
       </div>
     </div>
   );

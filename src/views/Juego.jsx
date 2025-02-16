@@ -104,11 +104,11 @@ const Juego = () => {
   }, [piezaActiva]);
 
   // Función para verificar si la posición de la pieza es válida
-  const esPosicionValida = (posicion) => {
-    if (!piezaActiva) return false;
+  const esPosicionValida = (posicion, pieza = piezaActiva) => {
+    if (!pieza) return false;
 
     const { x, y } = posicion;
-    const formaPieza = piezaActiva.matriz[0];
+    const formaPieza = pieza.matriz[0];
 
     for (let row = 0; row < formaPieza.length; row++) {
       for (let col = 0; col < formaPieza[row].length; col++) {
@@ -239,10 +239,11 @@ const Juego = () => {
     }
   };
 
-  const insertarPieza = (tablero, nuevaPosicion) => {
-    if (!piezaActiva) return;
+  // Función para insertar la pieza en el tablero
+  const insertarPieza = (tablero, nuevaPosicion, pieza = piezaActiva) => {
+    if (!pieza) return;
 
-    const formaPieza = piezaActiva.matriz[0];
+    const formaPieza = pieza.matriz[0];
 
     for (let row = 0; row < formaPieza.length; row++) {
       for (let col = 0; col < formaPieza[row].length; col++) {
